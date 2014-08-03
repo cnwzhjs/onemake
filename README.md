@@ -1,7 +1,7 @@
 onemake
 =======
 
-onemake is C/C++ build system built for Orandea Game Engine (open sourced as openoge).
+onemake is a C/C++ build system built for Orandea Game Engine (open sourced as openoge).
 
 It is design to fit following requirements:
 
@@ -26,6 +26,7 @@ onemake.json
 onemake.json is a json object whose keys are the names of your projects. Here are some simple sample:
 
 File tree
+
     |-onemake.json
     |-system
     |  |-include
@@ -42,6 +43,7 @@ File tree
     |  |-src
 
 onemake.json
+
     {
         "oge_system": {
             "directory": "system",
@@ -86,24 +88,28 @@ Command line options
 
 onemake use option=value format to assign options, currently available options are:
 
-* `target_platform`: windows, darwin, linux, openwrt, and etc...
-* `target_arch`: i386, `x86_64`, armv7a, mips, mipsel, and etc...
-* `scheme`: debug, release
+* `target_platform`: `windows`, `darwin`, `linux`, `openwrt`, and etc...
+* `target_arch`: `i386`, `x86_64`, `armv7a`, `mips`, `mipsel`, and etc...
+* `scheme`: `debug`, `release`
 * `concurrent`: max concurrent jobs
 * `projects`: projects to build
 
 Some examples:
 
 * only compile `oge_graphics` and its dependencies
+
     onemake.py projects=oge_graphics
 
 * compile both `oge_graphics` and `oge_audio`
+
     onemake.py projects=oge_graphics,oge_audio
 
 * compile with 8 parallel jobs
+
     onemake.py concurrent=8
 
 * cross compile for openwrt with mips ISA:
+
     export STAGING_DIR=your_open_wrt_staging_dir
     export PATH=$PATH:$STAGING_DIR/toolchain-your_toolchain_name/bin
     onemake.py target_platform=openwrt target_arch=mips
