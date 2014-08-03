@@ -1,0 +1,22 @@
+{
+    "cross_compile": true,
+
+    "host_platform": "linux",
+    "host_arch": "x86_64",
+
+    "target_platform": "openwrt",
+    "target_arch": "mips",
+
+    "compiler_set": "gcc",
+
+    "cc": "mips-openwrt-linux-gcc",
+    "cxx": "mips-openwrt-linux-g++",
+    "ar": "mips-openwrt-linux-ar",
+    "ld": "mips-openwrt-linux-g++",
+
+    "cflags": ["-g", "-c", "-Wall", "-std=c99"],
+    "cxxflags": ["-g", "-c", "-Wall", "-std=c++11"],
+    "arflags": [],
+    "ldflags": ["-std=c++11", "-pthread"],
+    "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=mips-openwrt-linux-gcc", "-DCMAKE_CXX_COMPILER=mips-openwrt-linux-g++"]
+}

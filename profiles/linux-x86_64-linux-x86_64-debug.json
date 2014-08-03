@@ -1,0 +1,21 @@
+{
+    "cross_compile": false,
+
+    "host_platform": "linux",
+    "host_arch": "x86_64",
+
+    "target_platform": "linux",
+    "target_arch": "x86_64",
+
+    "compiler_set": "gcc",
+
+    "cc": "gcc",
+    "cxx": "g++",
+    "ar": "ar",
+    "ld": "g++",
+
+    "cflags": ["-g", "-c", "-Wall", "-std=c99"],
+    "cxxflags": ["-g", "-c", "-Wall", "-std=c++11"],
+    "arflags": [],
+    "ldflags": ["-pthread"]
+}
