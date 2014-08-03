@@ -47,7 +47,7 @@ def scan_project_depends(name, project):
         include_dirs.append(project_include_dir)
 
     if os.path.exists(project_internal_include_dir):
-        include_dirs.append(project_include_dir)
+        include_dirs.append(project_internal_include_dir)
 
     include_dirs.append(OUTPUT_ROOT + '/include')
 
