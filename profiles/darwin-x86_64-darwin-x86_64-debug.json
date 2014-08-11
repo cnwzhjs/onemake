@@ -1,0 +1,22 @@
+{
+    "cross_compile": false,
+
+    "host_platform": "darwin",
+    "host_arch": "x86_64",
+
+    "target_platform": "darwin",
+    "target_arch": "x86_64",
+
+    "compiler_set": "clang",
+
+    "cc": "clang",
+    "cxx": "clang++",
+    "ar": "ar",
+    "ld": "clang++",
+    "ranlib": "ranlib",
+
+    "cflags": ["-g", "-c", "-Wall", "-std=c99"],
+    "cxxflags": ["-g", "-c", "-Wall", "-std=c++11"],
+    "arflags": [],
+    "ldflags": []
+}

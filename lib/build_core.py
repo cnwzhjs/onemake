@@ -111,7 +111,7 @@ def scan_source_files(name, project):
             if ext not in ['c', 'cc', 'cpp']:
                 continue
             source_files.append(path)
-    
+
     src_dirs = project.get('src_dirs', ['src'])
     for src_dir_name in src_dirs:
         src_directory = project["directory"] + "/" + src_dir_name
@@ -212,7 +212,7 @@ def create_jobs(name, project):
                 job_depends.append(copy_job)
 
         os.path.walk(include_directory, process_dir, None)
-    
+
     job_depends.extend(depends_jobs)
 
     if 'custom_build' in project:

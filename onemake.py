@@ -20,7 +20,47 @@ import path_helper
 import json_helper
 import option_helper
 
+host_profile="{0}-{1}".format(option_helper.OPTIONS['host_platform'], option_helper.OPTIONS['host_arch'])
+target_profile="{0}-{1}".format(option_helper.OPTIONS['target_platform'], option_helper.OPTIONS['target_arch'])
+scheme=option_helper.OPTIONS['scheme']
+
+profile_dir_candidates = [ROOT + '/profiles', ONEMAKE_ROOT + '/profiles']
+
+env = json_helper.load_json_in_dirs('{0}-{1}-{2}.json'.format(host_profile, target_profile, scheme), profile_dir_candidates)
+if env is None:
+    exit(1)
+env['compiler_options'] = json_helper.load_json_in_dirs("compiler-set-{0}.json".format(env['compiler_set']), profile_dir_candidates)
+if env['compiler_options'] is None:
+    exit(1)
+
 defined_projects=json_helper.load_json("onemake.json")
+
+def process_dict_queries(d, env):
+    for key in d.keys():
+        if '?' not in key:
+            continue
+        bare_key, query_string = tuple(key.split('?', 1))
+        queries = query_string.split('&')
+        is_match = True
+
+        for query in queries:
+            query_key, query_value = tuple(query.split('='))
+            if query_key not in env or env[query_key] != query_value:
+                is_match = False
+                break
+        if is_match:
+            if bare_key in d:
+                d[bare_key] += d[key]
+            else:
+                d[bare_key] = d[key]
+
+        del d[key]
+
+    for value in d.values():
+        if isinstance(value, dict):
+            process_dict_queries(value, env)
+
+process_dict_queries(defined_projects, env)
 
 if option_helper.OPTIONS.get('projects') is None:
     projects = defined_projects
@@ -40,20 +80,6 @@ else:
     for project in option_helper.OPTIONS.get('projects').split(','):
         if not add_project(project):
             console_helper.fatal("project {0} not found".format(project))
-
-
-host_profile="{0}-{1}".format(option_helper.OPTIONS['host_platform'], option_helper.OPTIONS['host_arch'])
-target_profile="{0}-{1}".format(option_helper.OPTIONS['target_platform'], option_helper.OPTIONS['target_arch'])
-scheme=option_helper.OPTIONS['scheme']
-
-profile_dir_candidates = [ROOT + '/profiles', ONEMAKE_ROOT + '/profiles']
-
-env = json_helper.load_json_in_dirs('{0}-{1}-{2}.json'.format(host_profile, target_profile, scheme), profile_dir_candidates)
-if env is None:
-    exit(1)
-env['compiler_options'] = json_helper.load_json_in_dirs("compiler-set-{0}.json".format(env['compiler_set']), profile_dir_candidates)
-if env['compiler_options'] is None:
-    exit(1)
 
 build_core.PROJECTS = projects
 build_core.ENV = env
@@ -105,7 +131,13 @@ def compile_file(project_name, src, dest):
         return compile_file_with_compiler(project, 'cxx', 'cxxflags', src, dest)
 
 def static_library(project, dest):
-    return compile_file_with_compiler(project, 'ar', 'arflags', project['object_files'], dest)
+    if not compile_file_with_compiler(project, 'ar', 'arflags', project['object_files'], dest):
+        return False
+
+    if 'ranlib' in env:
+        return run_cmd(build_core.concat_flags([env['ranlib'], dest]), dest + '.ranlib.log')
+    else:
+        return True
 
 def executable(project, dest):
     if not compile_file_with_compiler(project, 'ld', 'ldflags', project['object_files'], dest):

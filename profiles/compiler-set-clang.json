@@ -1,0 +1,25 @@
+{
+    "cc": {
+        "output_file": ["-o", "{0}"],
+        "source_file": ["{0}"],
+        "include_dir": ["-I{0}"]
+    },
+
+    "cxx": {
+        "output_file": ["-o", "{0}"],
+        "source_file": ["{0}"],
+        "include_dir": ["-I{0}"]
+    },
+
+    "ar": {
+        "output_file": ["crv", "{0}"],
+        "source_file": ["{0}"]
+    },
+
+    "ld": {
+        "output_file": ["-o", "{0}"],
+        "source_file": ["{0}"],
+        "library_dir": ["-L{0}"],
+        "library": ["-l{0}"]
+    }
+}
