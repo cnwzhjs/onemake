@@ -7,7 +7,7 @@
     "target_platform": "openwrt",
     "target_arch": "mips",
 
-    "scheme": "debug",
+    "scheme": "release",
 
     "compiler_set": "gcc",
 

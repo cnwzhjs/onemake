@@ -7,6 +7,8 @@
     "target_platform": "linux",
     "target_arch": "x86_64",
 
+    "scheme": "debug",
+
     "compiler_set": "gcc",
 
     "cc": "gcc",

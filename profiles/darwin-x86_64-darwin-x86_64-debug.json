@@ -7,6 +7,8 @@
     "target_platform": "darwin",
     "target_arch": "x86_64",
 
+    "scheme": "debug",
+
     "compiler_set": "clang",
 
     "cc": "clang",
