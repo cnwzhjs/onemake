@@ -14,8 +14,8 @@
     "ar": "ar",
     "ld": "g++",
 
-    "cflags": ["-g", "-c", "-Wall", "-std=c99"],
-    "cxxflags": ["-g", "-c", "-Wall", "-std=c++11"],
+    "cflags": ["-g", "-c", "-Wall", "-std=gnu99"],
+    "cxxflags": ["-g", "-c", "-Wall", "-std=gnu++11"],
     "arflags": [],
     "ldflags": ["-pthread"]
 }
