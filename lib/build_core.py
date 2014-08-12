@@ -117,6 +117,10 @@ def scan_source_files(name, project):
         src_directory = project["directory"] + "/" + src_dir_name
         os.path.walk(src_directory, process_dir, None)
 
+    if 'extra_src_files' in project:
+        for extra_src_file in project['extra_src_files']:
+            source_files.append(extra_src_file)
+
     project['source_files'] = source_files
 
 
@@ -186,7 +190,7 @@ def create_jobs(name, project):
         obj_files = []
         for src in project["source_files"]:
             src_path = ROOT + '/' + src
-            dest_path = OBJECT_ROOT + '/' + path_helper.get_obj_filename(src)
+            dest_path = OBJECT_ROOT + '/' + name + '/'  + path_helper.get_obj_filename(src)
             source_job = job_manager.add_or_lookup_source_job(src_path)
             compile_job_depends = [source_job]
             compile_job_depends.extend(depends_jobs)
