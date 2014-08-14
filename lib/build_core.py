@@ -186,19 +186,7 @@ def create_jobs(name, project):
         project["log_file"] = '{0}/bin/{1}.log'.format(OBJECT_ROOT, name)
 
     job_depends = []
-    if 'source_files' in project:
-        obj_files = []
-        for src in project["source_files"]:
-            src_path = ROOT + '/' + src
-            dest_path = OBJECT_ROOT + '/' + name + '/'  + path_helper.get_obj_filename(src)
-            source_job = job_manager.add_or_lookup_source_job(src_path)
-            compile_job_depends = [source_job]
-            compile_job_depends.extend(depends_jobs)
-            compile_job = job_manager.add_job("compile", dest_path, compile_job_depends, name)
-            job_depends.append(compile_job)
-            obj_files.append(dest_path)
-        project['object_files'] = obj_files
-
+    copy_jobs = []
     if project.get('output_headers', False):
         include_directory = project["directory"] + '/include'
         def process_dir(_, base_path, files):
@@ -214,8 +202,23 @@ def create_jobs(name, project):
                 copy_job_depends.extend(depends_jobs)
                 copy_job = job_manager.add_job("copy", dest_path, copy_job_depends, path)
                 job_depends.append(copy_job)
+                copy_jobs.append(copy_job)
 
         os.path.walk(include_directory, process_dir, None)
+
+    if 'source_files' in project:
+        obj_files = []
+        for src in project["source_files"]:
+            src_path = ROOT + '/' + src
+            dest_path = OBJECT_ROOT + '/' + name + '/'  + path_helper.get_obj_filename(src)
+            source_job = job_manager.add_or_lookup_source_job(src_path)
+            compile_job_depends = [source_job]
+            compile_job_depends.extend(depends_jobs)
+            compile_job_depends.extend(copy_jobs)
+            compile_job = job_manager.add_job("compile", dest_path, compile_job_depends, name)
+            job_depends.append(compile_job)
+            obj_files.append(dest_path)
+        project['object_files'] = obj_files
 
     job_depends.extend(depends_jobs)
 

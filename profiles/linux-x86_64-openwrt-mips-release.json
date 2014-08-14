@@ -16,9 +16,9 @@
     "ar": "mips-openwrt-linux-ar",
     "ld": "mips-openwrt-linux-g++",
 
-    "cflags": ["-g", "-c", "-Wall", "-std=c99"],
-    "cxxflags": ["-g", "-c", "-Wall", "-std=c++11"],
+    "cflags": ["-g", "-c", "-Wall", "-std=gnu99"],
+    "cxxflags": ["-g", "-c", "-Wall", "-std=gnu++11"],
     "arflags": [],
-    "ldflags": ["-std=c++11", "-pthread"],
+    "ldflags": ["-std=gnu++11", "-pthread"],
     "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=mips-openwrt-linux-gcc", "-DCMAKE_CXX_COMPILER=mips-openwrt-linux-g++"]
 }

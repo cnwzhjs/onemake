@@ -16,8 +16,8 @@
     "ar": "mipsel-openwrt-linux-ar",
     "ld": "mipsel-openwrt-linux-g++",
 
-    "cflags": ["-g", "-c", "-Wall", "-std=c99"],
-    "cxxflags": ["-g", "-c", "-Wall", "-std=c++11"],
+    "cflags": ["-g", "-c", "-Wall", "-std=gnu99"],
+    "cxxflags": ["-g", "-c", "-Wall", "-std=gnu++11"],
     "arflags": [],
     "ldflags": ["-pthread"],
     "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=mipsel-openwrt-linux-gcc", "-DCMAKE_CXX_COMPILER=mipsel-openwrt-linux-g++"]
