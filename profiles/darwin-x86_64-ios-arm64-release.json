@@ -1,0 +1,38 @@
+{
+    "cross_compile": false,
+
+    "host_platform": "darwin",
+    "host_arch": "x86_64",
+
+    "target_platform": "ios",
+    "target_arch": "arm64",
+
+    "scheme": "release",
+
+    "compiler_set": "clang",
+
+    "cc": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "cxx": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+    "ar": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar",
+    "ld": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+    "ranlib": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib",
+
+    "cflags": [
+        "-O3", "-c", "-Wall", "-std=c99",
+        "-m64", "-arch", "arm64", "-mfpu=neon", "-mfloat-abi=softfp", "-ffast-math", "-funsafe-math-optimizations", "-mthumb",
+        "-fpascal-strings", "-fmessage-length=0", "-pipe", "-Wno-trigraphs", "-Wreturn-type", "-fexceptions",
+        "-I/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include",
+        "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk",
+        "-miphoneos-version-min=5.0"
+    ],
+    "cxxflags": [
+        "-O3", "-c", "-Wall", "-std=c++11", "-stdlib=libc++",
+        "-m64", "-arch", "arm64", "-mfpu=neon", "-mfloat-abi=softfp", "-ffast-math", "-funsafe-math-optimizations", "-mthumb",
+        "-fpascal-strings", "-fmessage-length=0", "-pipe", "-Wno-trigraphs", "-Wreturn-type", "-fexceptions",
+        "-I/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include",
+        "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk",
+        "-miphoneos-version-min=5.0"
+    ],
+    "arflags": [],
+    "ldflags": []
+}
