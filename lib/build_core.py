@@ -52,11 +52,7 @@ def scan_project_depends(name, project):
     include_dirs.append(OUTPUT_ROOT + '/include')
 
     if 'extra_include_dirs' in project:
-        for extra_include_dir in project['extra_include_dirs']:
-            include_dir = extra_include_dir.replace('${OUTPUT_ROOT}', OUTPUT_ROOT)
-            include_dir = include_dir.replace('${SRC_DIR}', project['directory'])
-            include_dir = include_dir.replace('${OBJECT_ROOT}', OBJECT_ROOT)
-            include_dirs.append(include_dir)
+        include_dirs += project['extra_include_dirs']
 
     all_depends = project['depends'] if 'depends' in project else []
 

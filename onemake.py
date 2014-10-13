@@ -62,6 +62,38 @@ def process_dict_queries(d, env):
 
 process_dict_queries(defined_projects, env)
 
+
+def process_project_marco_str(project, value, env):
+    value = value.replace('${SRC_DIR}', project['directory'])
+    value = value.replace('${OBJECT_ROOT}', build_core.OBJECT_ROOT)
+    value = value.replace('${HOST_PLATFORM}', option_helper.OPTIONS["host_platform"])
+    value = value.replace('${HOST_ARCH}', option_helper.OPTIONS["host_arch"])
+    value = value.replace('${TARGET_PLATFORM}', option_helper.OPTIONS["target_platform"])
+    value = value.replace('${TARGET_ARCH}', option_helper.OPTIONS["target_arch"])
+
+    return value
+
+
+def process_project_marcos(project, d, env):
+    for key in d.keys():
+        value = d[key]
+
+        if isinstance(value, dict):
+            process_project_marcos(project, value, env)
+        elif isinstance(value, str) or isinstance(value, unicode):
+            d[key] = process_project_marco_str(project, value, env)
+        elif isinstance(value, list):
+            for i in xrange(len(value)):
+                subvalue = value[i]
+                if isinstance(subvalue, dict):
+                    process_project_marcos(project, subvalue, env)
+                elif isinstance(subvalue, str) or isinstance(subvalue, unicode):
+                    value[i] = process_project_marco_str(project, subvalue, env)
+
+
+for project in defined_projects.values():
+    process_project_marcos(project, project, env)
+
 if option_helper.OPTIONS.get('projects') is None:
     projects = defined_projects
 else:
