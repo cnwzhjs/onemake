@@ -33,6 +33,30 @@ env['compiler_options'] = json_helper.load_json_in_dirs("compiler-set-{0}.json".
 if env['compiler_options'] is None:
     exit(1)
 
+
+def detect_compiler_version():
+    if 'cc' not in env or 'gcc' not in env['cc']:
+        return
+
+    cmd = u'{0} --version'.format(env['cc'])
+    p = os.popen(cmd)
+    all_result = p.read()
+    if 'clang' in all_result:
+        return
+    version_line = all_result.split('\n')[0]
+    version = version_line.split(' ')[-1]
+    major, minor, release = version.split('.')
+    env['compiler_version'] = {
+        'full': version,
+        'major': major,
+        'minor': minor,
+        'release': release
+    }
+    p.close()
+
+
+detect_compiler_version()
+
 defined_projects=json_helper.load_json("onemake.json")
 
 def process_dict_queries(d, env):
@@ -70,6 +94,11 @@ def process_project_marco_str(project, value, env):
     value = value.replace('${HOST_ARCH}', option_helper.OPTIONS["host_arch"])
     value = value.replace('${TARGET_PLATFORM}', option_helper.OPTIONS["target_platform"])
     value = value.replace('${TARGET_ARCH}', option_helper.OPTIONS["target_arch"])
+    if 'compiler_version' in env:
+        value = value.replace('${COMPILER_VERSION}', env["compiler_version"]["full"])
+        value = value.replace('${COMPILER_VERSION_MAJOR}', env["compiler_version"]["major"])
+        value = value.replace('${COMPILER_VERSION_MINOR}', env["compiler_version"]["minor"])
+        value = value.replace('${COMPILER_VERSION_RELEASE}', env["compiler_version"]["release"])
 
     return value
 
