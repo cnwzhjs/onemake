@@ -11,14 +11,14 @@
 
     "compiler_set": "gcc",
 
-    "cc": "arm-linux-gnueabi-gcc",
-    "cxx": "arm-linux-gnueabi-g++",
-    "ar": "arm-linux-gnueabi-ar",
-    "ld": "arm-linux-gnueabi-g++",
+    "cc": "arm-linux-gnueabihf-gcc",
+    "cxx": "arm-linux-gnueabihf-g++",
+    "ar": "arm-linux-gnueabihf-ar",
+    "ld": "arm-linux-gnueabihf-g++",
 
     "cflags": ["-g", "-c", "-Wall", "-std=gnu99", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
     "cxxflags": ["-g", "-c", "-Wall", "-std=gnu++11", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
     "arflags": [],
     "ldflags": ["-pthread"],
-    "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=arm-linux-gnueabi-gcc", "-DCMAKE_CXX_COMPILER=arm-linux-gnueabi-g++"]
+    "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc", "-DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++"]
 }
