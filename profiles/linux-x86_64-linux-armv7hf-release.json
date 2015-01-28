@@ -5,7 +5,7 @@
     "host_arch": "x86_64",
 
     "target_platform": "linux",
-    "target_arch": "armv7",
+    "target_arch": "armv7hf",
 
     "scheme": "release",
 
@@ -16,9 +16,9 @@
     "ar": "arm-linux-gnueabihf-ar",
     "ld": "arm-linux-gnueabihf-g++",
 
-    "cflags": ["-g", "-c", "-Wall", "-std=gnu99", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
-    "cxxflags": ["-g", "-c", "-Wall", "-std=gnu++11", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
+    "cflags": ["-c", "-Wall", "-std=gnu99", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
+    "cxxflags": ["-c", "-Wall", "-std=gnu++11", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
     "arflags": [],
-    "ldflags": ["-pthread"],
+    "ldflags": ["-pthread", "-s"],
     "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc", "-DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++"]
 }
