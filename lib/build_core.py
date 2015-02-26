@@ -69,6 +69,9 @@ def scan_project_depends(name, project):
             for indirect_depend in PROJECTS[depend]["all_depends"]:
                 if indirect_depend not in all_depends:
                     all_depends.append(indirect_depend)
+                else:
+                    all_depends.remove(indirect_depend)
+                    all_depends.append(indirect_depend)
 
     if 'include_dirs' not in project:
         project['include_dirs'] = include_dirs

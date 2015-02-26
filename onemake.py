@@ -159,7 +159,7 @@ def run_cmd(cmd, log_file=None):
         ALL_ERRORS.append([
             "Failed to execute following command:",
             cmd,
-            "Please refer to log {1}: ".format(cmd, log_file) if log_file else "Please refer to log above"
+            "Please refer to log:\n\t{1}".format(cmd, log_file) if log_file else "Please refer to log above"
         ])
         ALL_ERRORS_LOCK.release()
         return False

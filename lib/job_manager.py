@@ -58,6 +58,8 @@ class Job(object):
                 return True
             ctime = os.path.getctime(self.dest)
             for depend_job in self.depends:
+                if depend_job is None:
+                    continue
                 if os.path.exists(depend_job.dest) and os.path.getctime(depend_job.dest) > ctime:
                     return True
             return False
