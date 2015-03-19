@@ -123,7 +123,22 @@ def scan_source_files(name, project):
     project['source_files'] = source_files
 
 
+def should_replace_with_gnupp0x(flag):
+    if flag != "-std=gnu++11":
+        return False
+    if ENV["compiler_set"] != "gcc":
+        return False
+    major, minor = int(ENV["compiler_version"]["major"]), int(ENV["compiler_version"]["minor"])
+    if major < 4:
+        return True
+    if major == 4 and minor <= 6:
+        return True
+    return False
+
 def process_flag(flag):
+    if should_replace_with_gnupp0x(flag):
+        return "-std=gnu++0x"
+
     has_space = ' ' in flag
     has_double_quote = '"' in flag
     has_single_quote = "'" in flag

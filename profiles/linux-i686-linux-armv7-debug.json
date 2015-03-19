@@ -1,0 +1,24 @@
+{
+    "cross_compile": true,
+
+    "host_platform": "linux",
+    "host_arch": "i686",
+
+    "target_platform": "linux",
+    "target_arch": "armv7",
+
+    "scheme": "debug",
+
+    "compiler_set": "gcc",
+
+    "cc": "arm-linux-gnueabi-gcc",
+    "cxx": "arm-linux-gnueabi-g++",
+    "ar": "arm-linux-gnueabi-ar",
+    "ld": "arm-linux-gnueabi-g++",
+
+    "cflags": ["-g", "-c", "-Wall", "-std=gnu99", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
+    "cxxflags": ["-g", "-c", "-Wall", "-std=gnu++11", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
+    "arflags": [],
+    "ldflags": ["-pthread"],
+    "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=arm-linux-gnueabi-gcc", "-DCMAKE_CXX_COMPILER=arm-linux-gnueabi-g++"]
+}
