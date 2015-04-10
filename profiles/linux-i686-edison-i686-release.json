@@ -4,7 +4,7 @@
     "host_platform": "linux",
     "host_arch": "i686",
 
-    "target_platform": "linux",
+    "target_platform": "edison",
     "target_arch": "i386",
 
     "scheme": "release",
@@ -19,5 +19,5 @@
     "cflags": ["-O3", "-c", "-m32", "-Wall", "-std=gnu99"],
     "cxxflags": ["-O3", "-c", "-m32", "-Wall", "-std=gnu++11"],
     "arflags": [],
-    "ldflags": ["-s", "-pthread", "-m32"]
+    "ldflags": ["-s", "-static", "-pthread", "-m32"]
 }
