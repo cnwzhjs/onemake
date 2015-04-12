@@ -33,6 +33,7 @@ env['compiler_options'] = json_helper.load_json_in_dirs("compiler-set-{0}.json".
 if env['compiler_options'] is None:
     exit(1)
 
+build_core.config(scheme=option_helper.OPTIONS['scheme'], profile=option_helper.OPTIONS['target_platform'], target=option_helper.OPTIONS['target_arch'])
 
 def detect_compiler_version():
     if 'cc' not in env or 'gcc' not in env['cc']:
@@ -90,6 +91,7 @@ process_dict_queries(defined_projects, env)
 def process_project_marco_str(project, value, env):
     value = value.replace('${SRC_DIR}', project['directory'])
     value = value.replace('${OBJECT_ROOT}', build_core.OBJECT_ROOT)
+    value = value.replace('${OUTPUT_ROOT}', build_core.OUTPUT_ROOT)
     value = value.replace('${HOST_PLATFORM}', option_helper.OPTIONS["host_platform"])
     value = value.replace('${HOST_ARCH}', option_helper.OPTIONS["host_arch"])
     value = value.replace('${TARGET_PLATFORM}', option_helper.OPTIONS["target_platform"])
@@ -144,7 +146,6 @@ else:
 
 build_core.PROJECTS = projects
 build_core.ENV = env
-build_core.config(scheme=option_helper.OPTIONS['scheme'], profile=option_helper.OPTIONS['target_platform'], target=option_helper.OPTIONS['target_arch'])
 build_core.prepare()
 
 
