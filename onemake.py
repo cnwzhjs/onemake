@@ -60,6 +60,21 @@ detect_compiler_version()
 
 defined_projects=json_helper.load_json("onemake.json")
 
+def merge_value(d, bare_key, addition_value):
+    if bare_key not in d:
+        d[bare_key] = addition_value
+        return
+
+    original_value = d[bare_key]
+
+    if isinstance(original_value, dict):
+        for key, value in addition_value.items():
+            merge_value(original_value, key, value)
+    elif isinstance(original_value, str):
+        d[bare_key] = addition_value
+    else:
+        d[bare_key] += addition_value
+
 def process_dict_queries(d, env):
     for key in d.keys():
         if '?' not in key:
@@ -74,10 +89,7 @@ def process_dict_queries(d, env):
                 is_match = False
                 break
         if is_match:
-            if bare_key in d:
-                d[bare_key] += d[key]
-            else:
-                d[bare_key] = d[key]
+            merge_value(d, bare_key, d[key])
 
         del d[key]
 
