@@ -62,16 +62,18 @@ def scan_project_depends(name, project):
                 console_helper.fatal("failed to find dependency {0} used by {1}".format(depend, name))
             scan_project_depends(depend, PROJECTS[depend])
 
-            for include_dir in PROJECTS[depend]["include_dirs"]:
-                if include_dir not in include_dirs and not include_dir.endswith('internal_include'):
-                    include_dirs.append(include_dir)
-
             for indirect_depend in PROJECTS[depend]["all_depends"]:
                 if indirect_depend not in all_depends:
                     all_depends.append(indirect_depend)
                 else:
                     all_depends.remove(indirect_depend)
                     all_depends.append(indirect_depend)
+
+    for depend in all_depends:
+        scan_project_depends(depend, PROJECTS[depend])
+        for include_dir in PROJECTS[depend]["include_dirs"]:
+            if include_dir not in include_dirs and not include_dir.endswith('internal_include'):
+                include_dirs.append(include_dir)
 
     if 'include_dirs' not in project:
         project['include_dirs'] = include_dirs
