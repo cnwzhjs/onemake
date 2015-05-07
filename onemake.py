@@ -23,12 +23,25 @@ import option_helper
 host_profile="{0}-{1}".format(option_helper.OPTIONS['host_platform'], option_helper.OPTIONS['host_arch'])
 target_profile="{0}-{1}".format(option_helper.OPTIONS['target_platform'], option_helper.OPTIONS['target_arch'])
 scheme=option_helper.OPTIONS['scheme']
+target=option_helper.OPTIONS["target"]
 
 profile_dir_candidates = [ROOT + '/profiles', ONEMAKE_ROOT + '/profiles']
 
-env = json_helper.load_json_in_dirs('{0}-{1}-{2}.json'.format(host_profile, target_profile, scheme), profile_dir_candidates)
+env = None
+envFilenameCandidates = [
+    '{0}-{1}-{2}-{3}.json'.format(host_profile, target_profile, scheme, target),
+    '{0}-{1}-{2}'.format(host_profile, target_profile, scheme)
+]
+
+for envFilenameCandidate in envFilenameCandidates:
+    env = json_helper.load_json_in_dirs('{0}-{1}-{2}.json'.format(host_profile, target_profile, scheme), profile_dir_candidates)
+    if env is not None:
+        break
+
 if env is None:
     exit(1)
+
+env['target'] = target
 env['compiler_options'] = json_helper.load_json_in_dirs("compiler-set-{0}.json".format(env['compiler_set']), profile_dir_candidates)
 if env['compiler_options'] is None:
     exit(1)
