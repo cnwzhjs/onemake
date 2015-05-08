@@ -6,6 +6,7 @@ OPTIONS={
     'operation': 'build',
     'scheme': 'debug',
     'target': 'generic',
+    'ccache': 'no',
     'host_arch': platform.uname()[4],
     'host_platform': platform.uname()[0].lower()
 }

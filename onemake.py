@@ -24,6 +24,7 @@ host_profile="{0}-{1}".format(option_helper.OPTIONS['host_platform'], option_hel
 target_profile="{0}-{1}".format(option_helper.OPTIONS['target_platform'], option_helper.OPTIONS['target_arch'])
 scheme=option_helper.OPTIONS['scheme']
 target=option_helper.OPTIONS["target"]
+ccache=option_helper.OPTIONS["ccache"]
 
 profile_dir_candidates = [ROOT + '/profiles', ONEMAKE_ROOT + '/profiles']
 
@@ -194,7 +195,7 @@ def run_cmd(cmd, log_file=None):
 
 
 def compile_file_with_compiler(project, compiler, compiler_flag_name, src, dest):
-    all_flags = [env[compiler]]
+    all_flags = ['ccache', env[compiler]] if ccache == 'yes' else [env[compiler]]
 
     build_core.add_compiler_flag(all_flags, compiler, "output_file", dest)
     if isinstance(src, list):
