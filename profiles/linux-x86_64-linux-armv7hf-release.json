@@ -17,7 +17,7 @@
     "ld": "arm-linux-gnueabihf-g++",
 
     "cflags": ["-c", "-Wall", "-std=gnu99", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
-    "cxxflags": ["-c", "-Wall", "-std=gnu++11", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a"],
+    "cxxflags": ["-c", "-Wall", "-std=gnu++11", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a", "-ffunction-sections", "-funwind-tables", "-fstack-protector", "-Wno-psabi", "-march=armv7-a", "-mfpu=neon", "-fpermissive", "-mthumb", "-O2", "-fomit-frame-pointer", "-fno-strict-aliasing", "-finline-limit=64", "-frtti", "-fexceptions"],
     "arflags": [],
     "ldflags": ["-pthread", "-s"],
     "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc", "-DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++"]
