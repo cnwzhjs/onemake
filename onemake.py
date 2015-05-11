@@ -67,6 +67,10 @@ def detect_compiler_version():
         'minor': minor,
         'release': release
     }
+    env['compiler_version_full'] = version
+    env['compiler_version_major'] = major
+    env['compiler_version_minor'] = minor
+    env['compiler_version_release'] = release
     p.close()
 
 
@@ -206,6 +210,14 @@ def compile_file_with_compiler(project, compiler, compiler_flag_name, src, dest)
 
     all_flags.extend(env.get(compiler_flag_name, []))
     all_flags.extend(project.get(compiler_flag_name, []))
+
+    if 'workarounds' in project:
+        for workaround_name, workaround_value in project['workarounds'].items():
+            if not workaround_value: continue
+            if workaround_name == "stopUsingC++11":
+                for op in ('-std=gnu++0x', '-std=gnu++11'):
+                    if op in all_flags:
+                        all_flags.remove(op)
 
     return run_cmd(build_core.concat_flags(all_flags), dest + '.log')
 

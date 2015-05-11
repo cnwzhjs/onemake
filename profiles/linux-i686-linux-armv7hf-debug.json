@@ -16,8 +16,8 @@
     "ar": "arm-linux-gnueabihf-ar",
     "ld": "arm-linux-gnueabihf-g++",
 
-    "cflags": ["-g", "-c", "-Wall", "-std=gnu99", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a", "-mfpu=neon"],
-    "cxxflags": ["-g", "-c", "-Wall", "-std=gnu++11", "-mcpu=generic-armv7-a", "-mtune=generic-armv7-a", "-mfpu=neon"],
+    "cflags": ["-g", "-c", "-Wall", "-std=gnu99", "-march=armv7-a", "-mfpu=vfp", "-mfloat-abi=hard"],
+    "cxxflags": ["-g", "-c", "-Wall", "-std=gnu++11","-march=armv7-a", "-mfpu=vfp", "-mfloat-abi=hard"],
     "arflags": [],
     "ldflags": ["-pthread"],
     "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc", "-DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++"]
