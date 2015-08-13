@@ -1,0 +1,24 @@
+{
+    "cross_compile": true,
+
+    "host_platform": "linux",
+    "host_arch": "i686",
+
+    "target_platform": "openwrt",
+    "target_arch": "mipsel",
+
+    "scheme": "debug",
+
+    "compiler_set": "gcc",
+
+    "cc": "mipsel-openwrt-linux-uclibc-gcc",
+    "cxx": "mipsel-openwrt-linux-uclibc-g++",
+    "ar": "mipsel-openwrt-linux-uclibc-ar",
+    "ld": "mipsel-openwrt-linux-uclibc-g++",
+
+    "cflags": ["-g", "-c", "-Wall", "-std=gnu99"],
+    "cxxflags": ["-g", "-c", "-Wall", "-std=gnu++11"],
+    "arflags": [],
+    "ldflags": ["-pthread"],
+    "cmakeflags": ["-DCMAKE_SYSTEM_NAME=Linux", "-DCMAKE_C_COMPILER=mipsel-openwrt-linux-uclibc-gcc", "-DCMAKE_CXX_COMPILER=mipsel-openwrt-linux-uclibc-g++"]
+}
